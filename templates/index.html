@@ -14,7 +14,7 @@
                             <div class="single-slider">
                                 <div class="trending-top mb-30">
                                     <div class="trend-top-img">
-                                        <img src="{% static 'assets/img/trending/trending_top2.jpg' %}" alt="">
+                                        <img src="{{ news_popular.get_image }}" alt="">
                                         <div class="trend-top-cap">
                                             <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">Business</span>
                                             <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">Anna Lora Stuns In White At Her Australian Premiere</a></h2>
@@ -24,31 +24,6 @@
                                 </div>
                             </div>
                             <!-- Single -->
-                            <div class="single-slider">
-                                <div class="trending-top mb-30">
-                                    <div class="trend-top-img">
-                                        <img src="{% static 'assets/img/trending/trending_top02.jpg' %}" alt="">
-                                        <div class="trend-top-cap">
-                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">Business</span>
-                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">Anna Lora Stuns In White At Her Australian Premiere</a></h2>
-                                            <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by Alice cloe   -   Jun 19, 2020</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="single-slider">
-                                <div class="trending-top mb-30">
-                                    <div class="trend-top-img">
-                                        <img src="{% static 'assets/img/trending/trending_top03.jpg' %}" alt="">
-                                        <div class="trend-top-cap">
-                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">Business</span>
-                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">Anna Lora Stuns In White At Her Australian Premiere</a></h2>
-                                            <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by Alice cloe   -   Jun 19, 2020</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!-- Right content -->
@@ -105,11 +80,9 @@
                                 <!--Nav Button  -->
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lifestyle</a>
-                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Travel</a>
-                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                        <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
-                                        <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a>
+                                        {% for category in categories %}
+                                        <a class="nav-item nav-link {% if forloop.counter == 1 %} active {% endif %}" id="nav-home-tab" data-toggle="tab" href="{{ category.id }}" role="tab" aria-controls="nav-home" aria-selected="false">{{ category.name }}</a>
+                                        {% endfor %}
                                     </div>
                                 </nav>
                                 <!--End Nav Button  -->
@@ -122,75 +95,74 @@
                             <!-- Nav Card -->
                             <div class="tab-content" id="nav-tabContent">
                                 <!-- card one -->
-                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="tab-pane fade show active" id="{{ category.id }}" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="row">
                                         <!-- Left Details Caption -->
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="whats-news-single mb-40 mb-40">
                                                 <div class="whates-img">
-                                                    <img src="{% static 'assets/img/gallery/whats_news_details1.png' %}" alt="">
+                                                    <img src="{{ news_popular.get_image }}" alt="">
                                                 </div>
                                                 <div class="whates-caption">
-                                                    <h4><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h4>
-                                                    <span>by Alice cloe   -   Jun 19, 2020</span>
-                                                    <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and singer Jennifer Lopez.</p>
+                                                    <h4><a href="#">{{ news.name }}</a></h4>
+                                                    <span>{{ news.created }}</span>
+                                                    <p>{{ news.description}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Right single caption -->
+                                        {% for news in newses_all %}
+                                        {% if forloop.first %}
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="row">
                                                 <!-- single -->
                                                 <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
                                                     <div class="whats-right-single mb-20">
                                                         <div class="whats-right-img">
-                                                            <img src="{% static 'assets/img/gallery/whats_right_img1.png' %}" alt="">
+                                                            <img src="{{ news.get_image }}" alt="">
                                                         </div>
                                                         <div class="whats-right-cap">
-                                                            <span class="colorb">FASHION</span>
-                                                            <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                            <p>Jun 19, 2020</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                    <div class="whats-right-single mb-20">
-                                                        <div class="whats-right-img">
-                                                            <img src="{% static 'assets/img/gallery/whats_right_img2.png' %}" alt="">
-                                                        </div>
-                                                        <div class="whats-right-cap">
-                                                            <span class="colorb">FASHION</span>
-                                                            <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                            <p>Jun 19, 2020</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                    <div class="whats-right-single mb-20">
-                                                        <div class="whats-right-img">
-                                                            <img src="{% static 'assets/img/gallery/whats_right_img3.png' %}" alt="">
-                                                        </div>
-                                                        <div class="whats-right-cap">
-                                                            <span class="colorg">FASHION</span>
-                                                            <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                            <p>Jun 19, 2020</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                    <div class="whats-right-single mb-20">
-                                                        <div class="whats-right-img">
-                                                            <img src="{% static 'assets/img/gallery/whats_right_img4.png' %}" alt="">
-                                                        </div>
-                                                        <div class="whats-right-cap">
-                                                            <span class="colorr">FASHION</span>
-                                                            <h4><a href="latest_news.html">Portrait of group of friends ting eat. market in.</a></h4>
-                                                            <p>Jun 19, 2020</p>
+                                                            <span class="colorb">{{ news.category}}</span>
+                                                            <h4><a href="#">{{ news.name }}</a></h4>
+                                                            <p>{{ news.created }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        {% elif forloop.counter < 7 %}
+                                        {% if forloop.counter == 2 %}
+                                            <div class="col-lg-4">
+                                                <div class="row g-4">
+                                        {% endif %}
+                                        {% if forloop.counter == 6 or forloop.last %}
+                                            <div class="col-12">
+                                                <div class="row g-4 align-items-center">
+                                                    <div class="col-5">
+                                                        <div class="overflow-hidden rounded">
+                                                            <img src="{{ news.get_image }}"
+                                                                 class="img-zoomin img-fluid rounded w-100" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <div class="features-content d-flex flex-column">
+                                                            <p class="text-uppercase mb-2">{{ news.category }}</p>
+                                                            <a href="#" class="h6">
+                                                                {{ news.name }}
+                                                            </a>
+                                                            <small class="text-body d-block">
+                                                                <i class="fas fa-calendar-alt me-1"></i>
+                                                                {{ news.update|date:"M d, Y" }}
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
                                     </div>
                                 </div>
                                 <!-- Card two -->
