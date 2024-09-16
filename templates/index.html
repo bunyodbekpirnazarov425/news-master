@@ -16,9 +16,9 @@
                                     <div class="trend-top-img">
                                         <img src="{{ news_popular.get_image }}" alt="">
                                         <div class="trend-top-cap">
-                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">Business</span>
-                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">Anna Lora Stuns In White At Her Australian Premiere</a></h2>
-                                            <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by Alice cloe   -   Jun 19, 2020</p>
+                                            <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{ news_popular.category.name}}</span>
+                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ news_popular.name}}</a></h2>
+                                            <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">{{ news_popular.created }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -30,31 +30,20 @@
                     <div class="col-lg-4">
                             <!-- Trending Top -->
                         <div class="row">
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="trending-top mb-30">
-                                    <div class="trend-top-img">
-                                        <img src="{% static 'assets/img/trending/trending_top3.jpg' %}" alt="">
-                                        <div class="trend-top-cap trend-top-cap2">
-                                            <span class="bgb">FASHION</span>
-                                            <h2><a href="latest_news.html">Secretart for Economic Air
-                                                plane that looks like</a></h2>
-                                            <p>by Alice cloe   -   Jun 19, 2020</p>
+                            {% for news in news_top %}
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <div class="trending-top mb-30">
+                                        <div class="trend-top-img">
+                                            <img src="{{ news.get_image }}" alt="">
+                                            <div class="trend-top-cap trend-top-cap2">
+                                                <span class="bgb">{{ news.category.name }}</span>
+                                                <h2><a href="latest_news.html">{{ news.name }}</a></h2>
+                                                <p>{{ news.created }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12 col-md-6 col-sm-6">
-                                <div class="trending-top mb-30">
-                                    <div class="trend-top-img">
-                                        <img src="{% static 'assets/img/trending/trending_top4.jpg' %}" alt="">
-                                        <div class="trend-top-cap trend-top-cap2">
-                                            <span class="bgg">TECH </span>
-                                            <h2><a href="latest_news.html">Secretart for Economic Air plane that looks like</a></h2>
-                                            <p>by Alice cloe   -   Jun 19, 2020</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -62,7 +51,8 @@
         </div>
     </div>
     <!-- Trending Area End -->
-    <!-- Whats New Start -->
+
+<!-- Whats New Start -->
     <section class="whats-news-area pt-50 pb-20 gray-bg">
         <div class="container">
             <div class="row">
@@ -81,7 +71,7 @@
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                         {% for category in categories %}
-                                        <a class="nav-item nav-link {% if forloop.counter == 1 %} active {% endif %}" id="nav-home-tab" data-toggle="tab" href="{{ category.id }}" role="tab" aria-controls="nav-home" aria-selected="false">{{ category.name }}</a>
+                                        <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">{{ category.name }}</a>
                                         {% endfor %}
                                     </div>
                                 </nav>
@@ -95,7 +85,7 @@
                             <!-- Nav Card -->
                             <div class="tab-content" id="nav-tabContent">
                                 <!-- card one -->
-                                <div class="tab-pane fade show active" id="{{ category.id }}" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                     <div class="row">
                                         <!-- Left Details Caption -->
                                         <div class="col-xl-6 col-lg-12">
@@ -104,65 +94,32 @@
                                                     <img src="{{ news_popular.get_image }}" alt="">
                                                 </div>
                                                 <div class="whates-caption">
-                                                    <h4><a href="#">{{ news.name }}</a></h4>
-                                                    <span>{{ news.created }}</span>
-                                                    <p>{{ news.description}}</p>
+                                                    <h4><a href="latest_news.html">{{ news_popular.name }}</a></h4>
+                                                    <span>{{ news_popular.created }}</span>
+                                                    <p>{{ news_popular.description|truncatewords:30 }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Right single caption -->
-                                        {% for news in newses_all %}
-                                        {% if forloop.first %}
                                         <div class="col-xl-6 col-lg-12">
                                             <div class="row">
                                                 <!-- single -->
-                                                <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
-                                                    <div class="whats-right-single mb-20">
-                                                        <div class="whats-right-img">
-                                                            <img src="{{ news.get_image }}" alt="">
-                                                        </div>
-                                                        <div class="whats-right-cap">
-                                                            <span class="colorb">{{ news.category}}</span>
-                                                            <h4><a href="#">{{ news.name }}</a></h4>
-                                                            <p>{{ news.created }}</p>
+                                                {% for news in newses_all %}
+                                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-10">
+                                                        <div class="whats-right-single mb-20">
+                                                            <div class="whats-right-img">
+                                                                <img src="{{ news.get_image }}" alt="{{ news.name }}" style="width: 100%; height: auto;">
+                                                            </div>
+                                                            <div class="whats-right-cap">
+                                                                <span class="colorb">{{ news.category.name }}</span>
+                                                                <h4><a href="latest_news.html">{{ news.name }}</a></h4>
+                                                                <p>{{ news.created }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                {% endfor %}
                                             </div>
                                         </div>
-                                        {% elif forloop.counter < 7 %}
-                                        {% if forloop.counter == 2 %}
-                                            <div class="col-lg-4">
-                                                <div class="row g-4">
-                                        {% endif %}
-                                        {% if forloop.counter == 6 or forloop.last %}
-                                            <div class="col-12">
-                                                <div class="row g-4 align-items-center">
-                                                    <div class="col-5">
-                                                        <div class="overflow-hidden rounded">
-                                                            <img src="{{ news.get_image }}"
-                                                                 class="img-zoomin img-fluid rounded w-100" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-7">
-                                                        <div class="features-content d-flex flex-column">
-                                                            <p class="text-uppercase mb-2">{{ news.category }}</p>
-                                                            <a href="#" class="h6">
-                                                                {{ news.name }}
-                                                            </a>
-                                                            <small class="text-body d-block">
-                                                                <i class="fas fa-calendar-alt me-1"></i>
-                                                                {{ news.update|date:"M d, Y" }}
-                                                            </small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                </div>
-                                            </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
                                     </div>
                                 </div>
                                 <!-- Card two -->
@@ -553,6 +510,7 @@
         </div>
     </section>
     <!-- Whats New End -->
+
     <!--   Weekly2-News start -->
     <div class="weekly2-news-area pt-50 pb-30 gray-bg">
         <div class="container">

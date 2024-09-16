@@ -27,7 +27,7 @@ class News(models.Model):
 
     def get_image(self):
         if self.image:
-            return f'<img src="{self.image.url}" alt="">'
+            return f"{self.image.url}"
         else:
             return "https://answers-afd.microsoft.com/static/images/image-not-found.jpg"
 
