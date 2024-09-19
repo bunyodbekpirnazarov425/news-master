@@ -17,7 +17,7 @@
                                         <img src="{{ news_popular.get_image }}" alt="">
                                         <div class="trend-top-cap">
                                             <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{ news_popular.category.name}}</span>
-                                            <h2><a href="latest_news.html" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ news_popular.name}}</a></h2>
+                                            <h2><a href="{% url 'about' news_popular.id %}" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ news_popular.name}}</a></h2>
                                             <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">{{ news_popular.created }}</p>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                                             <img src="{{ news.get_image }}" alt="">
                                             <div class="trend-top-cap trend-top-cap2">
                                                 <span class="bgb">{{ news.category.name }}</span>
-                                                <h2><a href="latest_news.html">{{ news.name }}</a></h2>
+                                                <h2><a href="{% url 'about' news.id %}">{{ news.name }}</a></h2>
                                                 <p>{{ news.created }}</p>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                                     <img src="{{ news_popular.get_image }}" alt="">
                                                 </div>
                                                 <div class="whates-caption">
-                                                    <h4><a href="latest_news.html">{{ news_popular.name }}</a></h4>
+                                                    <h4><a href="{% url 'about' news_popular.id %}">{{ news_popular.name }}</a></h4>
                                                     <span>{{ news_popular.created }}</span>
                                                     <p>{{ news_popular.description|truncatewords:30 }}</p>
                                                 </div>
@@ -112,7 +112,7 @@
                                                             </div>
                                                             <div class="whats-right-cap">
                                                                 <span class="colorb">{{ news.category.name }}</span>
-                                                                <h4><a href="latest_news.html">{{ news.name }}</a></h4>
+                                                                <h4><a href="{% url 'about' news.id %}">{{ news.name }}</a></h4>
                                                                 <p>{{ news.created }}</p>
                                                             </div>
                                                         </div>
